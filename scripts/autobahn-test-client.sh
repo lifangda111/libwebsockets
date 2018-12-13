@@ -15,7 +15,7 @@ echo
 
 set -u
 
-PARALLEL=8
+PARALLEL=2
 N=1
 OS=`uname`
 

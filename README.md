@@ -18,7 +18,34 @@ News
 
 ## New features on master
 
- - **`lws-genec` ECDH + ECDSA** - Work in progress
+ - **`JWE`** - JWE (RFC7516) Work in progress: Working CI tests
+
+|Key Encryption|Payload authentication + crypt|Enc + Dec Support|
+|---|---|---|
+|`RSAES-PKCS1-v1.5` 2048b|`AES_128_CBC_HMAC_SHA_256`|Enc + Dec|
+|`RSAES-PKCS1-v1.5` 2048b|`AES_192_CBC_HMAC_SHA_384`|Enc + Dec|
+|`RSAES-PKCS1-v1.5` 2048b|`AES_256_CBC_HMAC_SHA_512`|Enc + Dec|
+|`RSAES-PKCS1-v1.5` 4096b|`AES_128_CBC_HMAC_SHA_256`|Enc + Dec|
+|`RSAES-PKCS1-v1.5` 4096b|`AES_192_CBC_HMAC_SHA_384`|Enc + Dec|
+|`RSAES-PKCS1-v1.5` 4096b|`AES_256_CBC_HMAC_SHA_512`|Enc + Dec|
+|`AES128KW`|`AES_128_CBC_HMAC_SHA_256`|Dec|
+|`AES128KW`|`AES_192_CBC_HMAC_SHA_384`|Dec|
+|`AES128KW`|`AES_256_CBC_HMAC_SHA_512`|Dec|
+|`ECDH-ES` P-256|`AES_128_GCM`|Dec|
+
+All tests pass on both OpenSSL and mbedTLS backends, using keys generated on
+both OpenSSL and mbedTLS in the tests.
+
+   [jwe api](https://libwebsockets.org/git/libwebsockets/tree/include/libwebsockets/lws-jwe.h), 
+   [jwe unit tests](https://libwebsockets.org/git/libwebsockets/tree/minimal-examples/api-tests/api-test-jose/jwe.c)
+
+ - **`lws-genec` ECDSA** - JWS-compatible ECDSA is supported on both OpenSSL and mbedtls... Work in progress: ECDH-ES
+
+ - **`JWS`** - JWS (RFC7515) is now supported for none, HS256/384/512, RS256/384/512, and ES256/384/512, on both OpenSSL and mbedtls
+   [jws api](https://libwebsockets.org/git/libwebsockets/tree/include/libwebsockets/lws-jws.h), 
+   [jws unit tests](https://libwebsockets.org/git/libwebsockets/tree/minimal-examples/api-tests/api-test-jose/jws.c)
+
+ - **`JWK`** - JWK (RFC7517) now supports oct, RSA and EC keys including JSON key arrays on both OpenSSL and mbedtls
 
  - **`lws-genrsa` OAEP + PSS support** - in addition to PKCS#1 1.5 padding, OAEP and PSS are
    now supported on both mbedtls and openssl backends.
